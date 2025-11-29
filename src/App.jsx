@@ -6,12 +6,11 @@ function App() {
   const [user, setUser] = useState(null);
 
   const provider = new GoogleAuthProvider();
-
   const handleGoogleSignUp = () => {
-    console.log("check sign in");
+    // console.log("check goole sign in");
     signInWithPopup(auth, provider)
       .then((result) => {
-        console.log(result.user);
+        // console.log(result.user);
         setUser(result.user);
       })
       .catch((error) => {
@@ -21,15 +20,14 @@ function App() {
   };
 
   const handleGoogleSignOut = () => {
-    console.log("check sign out");
+    console.log("check google sign out");
     signOut(auth)
       .then((result) => {
         console.log(result);
-        setUser(result.user);
+        setUser(null);
       })
       .catch((error) => {
         console.log(error);
-        setUser(null);
       });
   };
 
@@ -51,7 +49,7 @@ function App() {
   return (
     <>
       <h1>Hello From App</h1>
-      <h1>both sign in and out together</h1>
+      <h1>simple sign in and out</h1>
       <div style={flexStyle}>
         <button onClick={handleGoogleSignUp} style={btnStyle}>
           Sign Up With Google
@@ -67,13 +65,17 @@ function App() {
 
       <h1>sign in and out with conditinal rendering</h1>
       {user ? (
-        <button onClick={handleGoogleSignOut} style={btnStyle2}>
-          Sign Out From Google
-        </button>
+        <>
+          <button onClick={handleGoogleSignOut} style={btnStyle2}>
+            Sign Out From Google
+          </button>
+        </>
       ) : (
-        <button onClick={handleGoogleSignUp} style={btnStyle}>
-          Sign Up With Google
-        </button>
+        <>
+          <button onClick={handleGoogleSignUp} style={btnStyle}>
+            Sign Up With Google
+          </button>
+        </>
       )}
 
       {user && (
